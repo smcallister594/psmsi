@@ -27,8 +27,14 @@ jobs:
     - name: Build
       run: dotnet build -o PSMSI
 
-    - name: Release
-      run: Publish-Module -Path .\PSMSI -NuGetApiKey $Env:APIKEY
-      env:
-        APIKEY: ${{ secrets.PSMSI }}
-      shell: pwsh
+    # - name: Release
+    #   run: Publish-Module -Path .\PSMSI -NuGetApiKey $Env:APIKEY
+    #   env:
+    #     APIKEY: ${{ secrets.PSMSI }}
+    #   shell: pwsh
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: PSMSI-Build
+        path: PSMSI/**
